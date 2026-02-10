@@ -36,11 +36,19 @@ int main()
 		// Create two variables which are widgets or draw objects. 
 		//   both of these are circles. 
 		//     makeCircle is passed the radius, and then the upper left x and y
-		CircleShape c1 = makeCircle(60, 5, 5);
-		CircleShape c2 = makeCircle(10, 600, 400);
+		array<CircleShape, 20> circles;
+		int radius = 60;
+		int diameter = radius * 2;
+		int startX = 5;
+		int startY = 5;
+		int rowLen = 5;
 
-		window.draw(c1); // c1 is a circle, draw it into the window
-		window.draw(c2); // c2 is a different circle.   
+		for (size_t i = 0, x = startX, y = startY; i < circles.size(); i++) {
+			x += diameter;
+			if (i % rowLen == 0) { x = startX; y += diameter; }
+			circles[i] = (makeCircle(radius, x, y));
+			window.draw(circles[i]);
+		} 
 
 		// end the current frame; put everything on the screen
 		window.display();
